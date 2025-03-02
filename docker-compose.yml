@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules  # To prevent overwriting node_modules inside the container
+    ports:
+      - "3000:3000"  # Port mapping for your backend
+    environment:
+      - NODE_ENV=development
+    command: sh -c "npm install && npm run dev"  # Automatically install dependencies and start the app
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # To persist the database data
+
+volumes:
+  pgdata:
