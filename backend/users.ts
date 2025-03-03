@@ -7,9 +7,9 @@ router.post(
   '/',
   (req: Request, res: Response, next: NextFunction) => {
     console.log('POST /users route hit');
-    next(); // Call the next middleware or controller
+    next(); 
   },
-  createUser // Calls the createUser function upon POST
+  createUser
 );
 
 export default router;

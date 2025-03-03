@@ -4,13 +4,16 @@ services:
   backend:
     build: .
     volumes:
-      - .:/app
-      - /app/node_modules  # To prevent overwriting node_modules inside the container
+      - ./backend:/app/backend
+      - /app/backend/node_modules  # To prevent overwriting node_modules inside the container
+    working_dir: /app/backend  
     ports:
       - "3000:3000"  # Port mapping for your backend
     environment:
       - NODE_ENV=development
-    command: sh -c "npm install && npm run dev"  # Automatically install dependencies and start the app
+    command: sh -c "npm install && npm run dev"
+    stdin_open: true
+    tty: true
 
   db:
     image: postgres

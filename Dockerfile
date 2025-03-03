@@ -2,7 +2,7 @@
 FROM node:16
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /app/backend
 
 # Copy package.json and package-lock.json (if present) from the backend folder
 COPY backend/package*.json ./backend/
@@ -17,10 +17,11 @@ COPY backend /app/backend
 # Use locally installed TypeScript instead of globally installed
 
 RUN npm install typescript
-RUN npx tsc --project ./backend/tsconfig.json
+RUN npx tsc --project ./tsconfig.json
+
 
 # Expose the port your app will run on
 EXPOSE 3000
 
-# Command to run your server (adjust if needed)
-CMD ["npm", "start", "--prefix", "backend"]
+
+
