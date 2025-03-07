@@ -1,12 +1,71 @@
 import express, {Request, Response} from 'express';
-import nodemailer from 'nodemailer';
+import * as authenticationService from './authenticationService';
 import crypto from 'crypto'; 
-import bcrypt from 'bcrypt'; 
+import bcrypt from 'bcryptjs'; 
+/*
+import nodemailer from 'nodemailer';
+
+*/
 
 const router = express.Router();
 import * as pool from './db'; 
 
+export const forgotPassword = async (req: Request, res: Response): Promise<void> => {
+    console.log('POST received to retreive forgotten password.');
 
+    try{
+        const {email}: {email: string} = req.body;
+        const password = await authenticationService.forgotpassword(email);
+        res.status(201).json("The link has been sent to your email.");
+    }catch (error: any){
+        console.error(error.message);
+        res.status(500).json({error: error.message});
+    }
+
+};
+
+export const resetPassword = async(req: Request, res :Response): Promise<any> => {
+    console.log('Post received to RESET password.');
+
+    try{
+        const { token } = req.body;
+        const { password }: {password :string} = req.body;    
+        
+        const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+            const userResult = await pool.query(
+                "SELECT * FROM users WHERE resettoken = $1 AND resettokenexpires::TIMESTAMP > NOW()",
+                [hashedToken]
+            );
+
+            if (userResult.rows.length === 0) return res.status(400).json({ message: "Invalid or expired token" });
+
+    
+    const hashedPassword = await bcrypt.hash(password, 10); //hashes new password
+
+    //updates password in DB
+    await pool.query(
+      "UPDATE users SET password = $1, resettoken = NULL, resettokenexpires = NULL WHERE email = $2",
+      [hashedPassword, userResult.rows[0].email]
+    );
+
+        res.json({ message: "Password updated successfully" });
+    } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/*
 router.post("/forgot-password", async (req, res) =>{
     const {email} = req.body; 
 
@@ -25,8 +84,9 @@ router.post("/forgot-password", async (req, res) =>{
     );
 
     const mailer = nodemailer.createTransport({
-        service: "gmail",
-        auth: {user: "youremail@gmail.com", pass: "your-password"},
+        host: "sandbox.smtp.mailtrap.io",
+        port: 587,
+        auth: {user: "84217c2dfc40ce", pass: "2731451e5a996a"},
     });
 
     const resetUrl= `http://localhost:3000/reset-password/${resetToken}`;
@@ -53,14 +113,12 @@ router.post("/forgot-password", async (req, res) =>{
             const userResult = await pool.query(
                 "SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires > NOW()",
                 [hashedToken]
-            );
+            );            if (userResult.rows.length === 0) return res.status(400).json({ message: "Invalid or expired token" });
 
-            if (userResult.rows.length === 0) return res.status(400).json({ message: "Invalid or expired token" });
+    
+    const hashedPassword = await bcrypt.hash(password, 10); //hashes new password
 
-    // Hash new password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Update password in DB
+    //updates password in DB
     await pool.query(
       "UPDATE users SET password = $1, reset_token = NULL, reset_token_expires = NULL WHERE email = $2",
       [hashedPassword, userResult.rows[0].email]
@@ -72,6 +130,7 @@ router.post("/forgot-password", async (req, res) =>{
   }
         
     });
+    */
 
 
     

@@ -23,6 +23,9 @@ SET row_security = off;
 
 CREATE SCHEMA sportsbetdb;
 
+ALTER DATABASE mydb SET search_path TO sportsbetdb, public;
+
+
 
 ALTER SCHEMA sportsbetdb OWNER TO "user";
 
@@ -32,41 +35,11 @@ SET default_table_access_method = heap;
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: user
---
 
-CREATE TABLE public.users (
-    username character varying(100),
-    email character varying(100),
-    password character varying(100),
-    age integer,
-    city character varying(100),
-    id integer NOT NULL
-);
-
-
-ALTER TABLE public.users OWNER TO "user";
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: user
 --
-
-CREATE SEQUENCE public.users_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.users_id_seq OWNER TO "user";
-
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: user
---
-
-ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
-
 
 --
 -- Name: users; Type: TABLE; Schema: sportsbetdb; Owner: user
@@ -78,8 +51,12 @@ CREATE TABLE sportsbetdb.users (
     email character varying(100),
     password character varying(100),
     age integer,
-    city character varying(100)
+    city character varying(100),
+    verificationtoken character varying(100),
+    resettoken character varying(100),
+    resettokenexpires character varying(100)
 );
+
 
 
 ALTER TABLE sportsbetdb.users OWNER TO "user";
@@ -110,8 +87,6 @@ ALTER SEQUENCE sportsbetdb.users_id_seq OWNED BY sportsbetdb.users.id;
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: user
 --
 
-ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
-
 
 --
 -- Name: users id; Type: DEFAULT; Schema: sportsbetdb; Owner: user
@@ -124,9 +99,6 @@ ALTER TABLE ONLY sportsbetdb.users ALTER COLUMN id SET DEFAULT nextval('sportsbe
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: user
 --
 
-ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
 
 --
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: sportsbetdb; Owner: user
@@ -134,6 +106,7 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY sportsbetdb.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
 
 
 --
