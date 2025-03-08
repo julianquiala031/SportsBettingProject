@@ -33,3 +33,28 @@ const userCheck = await db.query("SELECT * FROM users WHERE email = $1", [email]
 
     
     };
+
+    export const userLogin = async (email: string, password: string): Promise<any> =>{
+        
+        try{
+            const userCheck = await db.query(
+                'SELECT id FROM users WHERE email = $1',
+                [email]
+            );
+
+            if(userCheck.rows.length == 0){
+                throw new Error('Invald username or password');
+            }
+            const user = userCheck.rows[0];
+
+            if (password !== user.password) {
+                throw new Error('Invalid username or password');
+            }
+
+            return user;
+
+        }catch(error){
+            console.error('Error during login: ', error);
+        }      
+    };
+    

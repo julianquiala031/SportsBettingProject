@@ -1,6 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { createUser } from './userController'; // Assuming `createUser` is exported
-
 const router = express.Router();
 
 router.post(

@@ -1,6 +1,7 @@
 import express, {Request, Response, NextFunction} from 'express';
 import { forgotPassword } from './authenticationController';
 import { resetPassword } from './authenticationController'; 
+import { userLogin } from './authenticationController';
 
 const router = express.Router(); //creates router obj for auth feature
 
@@ -24,5 +25,14 @@ router.post(
     },
     resetPassword
 );
+
+router.get(
+    '/user-Login',
+    (req: Request, res: Response, next: NextFunction) => {
+      console.log('GET /users route hit');
+      next();
+    },
+    userLogin
+  );
 
 export default router;
