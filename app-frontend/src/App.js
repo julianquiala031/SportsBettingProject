@@ -1,25 +1,34 @@
 
 import React from "react";
 import styles from "./App.module.css";
+import backgroundImage from "./assets/background.jpg";
 
 function App() {
   return (
-  <>
-    
-<section className={styles.menuBar}>
-         <header>
-             <div>
-                 <h3> 
-                   <a href= "#">Social Links</a>
-                   <a href= "#">Discover</a>
-                   <a href= "#">Community</a>
-                   <a href= "#">Resources</a>
-                   <a href= "#">Discord</a>
-                   <a href= "#">Contact</a>
-                 </h3>
-             </div>
-         </header>
-</section>
+    <>
+      {/* ✅ Background wrapper for the top section */}
+      <div 
+        className={styles.mainContainer} 
+        style={{ 
+          backgroundImage: `url(${backgroundImage})`, 
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "100vh",
+          width: "100%",
+        }}
+      >
+        {/* ✅ Menu Bar */}
+        <section className={styles.menuBar}>
+          <div className={styles.navLinks}>
+            <a href="#">Social Links</a>
+            <a href="#">Discover</a>
+            <a href="#">Community</a>
+            <a href="#">Resources</a>
+            <a href="#">Discord</a>
+            <a href="#">Contact</a>
+          </div>
+        </section>
 
 <section className={styles.welcomeTitleContainer}>
     <div className={styles.welcomeTitle}>
@@ -59,12 +68,7 @@ function App() {
                 </form>
             </div>
         </section>
-
-
-
-    
-    
-
+        </div>    
   </>
   )
 }
