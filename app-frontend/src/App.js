@@ -1,11 +1,12 @@
-import './App.css';
+
 import React from "react";
+import styles from "./App.module.css";
 
 function App() {
   return (
   <>
     
-<section className='menu-bar'>
+<section className={styles.menuBar}>
          <header>
              <div>
                  <h3> 
@@ -20,20 +21,20 @@ function App() {
          </header>
 </section>
 
-<section className= 'welcome-title-container'>
-    <div className= 'welcome-title'>
+<section className={styles.welcomeTitleContainer}>
+    <div className={styles.welcomeTitle}>
           <h1>Welcome to BetterBets</h1>
     </div>
-    <div className= 'welcome-desc'>
+    <div className={styles.welcomeDesc}>
           <h4>Place your bets and enjoy the thrill of sports betting.</h4>
     </div>
 </section>
 
-<section className="login-container">
-            <div className="login-box">
+<section className={styles.loginContainer}>
+            <div className={styles.loginBox}>
                 <form>
-                    <div className="input-group">
-                        <label htmlFor="email">Email</label>
+                    <div className={styles.inputGroup}>
+                        <label htmlFor='email'>Email</label>
                         <input
                             type="email"
                             id="email"
@@ -41,7 +42,7 @@ function App() {
                             
                         />
                     </div>
-                    <div className="input-group">
+                    <div className={styles.inputGroup}>
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
@@ -50,11 +51,11 @@ function App() {
                           
                         />
                     </div>
-                    <div className="forgot-password">
+                    <div className={styles.forgotPassword}>
                         <a href="#">Forgot password?</a>
                     </div>
-                    <button type="submit" className="sign-in-button">Sign in</button>
-                    <button type="button" className="register-button">Register</button>
+                    <button type="submit" className={styles.signInbutton}>Sign in</button>
+                    <button type="button" className={styles.registerButton}>Register</button>
                 </form>
             </div>
         </section>
