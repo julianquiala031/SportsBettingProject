@@ -14,7 +14,7 @@ function App() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          minHeight: "100vh",
+          minHeight: "70vh",
           width: "100%",
         }}
       >
@@ -30,6 +30,7 @@ function App() {
           </div>
         </section>
 
+        {/* ✅ Welcome Title */}  
 <section className={styles.welcomeTitleContainer}>
     <div className={styles.welcomeTitle}>
           <h1>Welcome to BetterBets</h1>
@@ -38,7 +39,7 @@ function App() {
           <h4>Place your bets and enjoy the thrill of sports betting.</h4>
     </div>
 </section>
-
+        {/* ✅ Login box and input */}  
 <section className={styles.loginContainer}>
             <div className={styles.loginBox}>
                 <form>
@@ -68,27 +69,31 @@ function App() {
                 </form>
             </div>
         </section>
-        </div>    
+
+        
+        </div>
+
+        {/*END OF BACKGROUND WRAPPER FOR TOP OF WEBSITE*/}
+        {/*---------------------------------------------------------------------------*/}
+        
+        {/* ✅ Featured bets info */}
+        <section className={styles.featuredBetsSection}>
+    <div className={styles.featuredBetsContainer}>
+        <h1>Featured Bets</h1>
+        <h4>Explore popular best options for upcoming matches.</h4>
+        <form>
+          <div className={styles.featuredbetsButtons}>
+            <button type="view all bets" className={styles.viewAllBetsButton}>View all bets</button>
+            <button type="explore more" className={styles.exploreMoreButton}>Explore more</button>
+          </div>
+        </form>
+    
+    </div>
+</section>  
+
+
   </>
   )
 }
 
 export default App
-
-
-/*<div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>*/
