@@ -64,8 +64,12 @@ function App() {
                     <div className={styles.forgotPassword}>
                         <a href="#">Forgot password?</a>
                     </div>
-                    <button type="submit" className={styles.signInbutton}>Sign in</button>
-                    <button type="button" className={styles.registerButton}>Register</button>
+                    <div className={styles.loginButtons}>
+                        <button type="submit" className={styles.signInbutton}>Sign in</button>
+                        <button type="button" className={styles.registerButton}>Register</button>
+
+                    </div>
+                    
                 </form>
             </div>
         </section>
