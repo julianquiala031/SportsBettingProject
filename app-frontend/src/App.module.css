@@ -21,42 +21,70 @@
     color: black;
     font-weight: bold;
     font-size: 16px;
-  }
-
+    }
 .welcomeTitle {
-    font-size: 24px;
+    font-size: 35px;
     color: #000000;
     text-align: center;
     
     }
 .welcomeDesc{
+    font-size: 20px;
     text-align: center;
     }
 .welcomeTitleContainer {
     width: 100%;
     height: 100%;
     }
-.loginContainer {
-    position: absolute;
+.loginWrapper {
+    position:absolute;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 500px;
+    }
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+      
+.loginWrapper::after,.loginWrapper::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: conic-gradient(from var(--angle),#199959,rgb(56, 56, 80),rgb(204, 214, 61),rgb(171, 207, 124),#199959);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    padding: 5px;
+    z-index: -1; 
+    border-radius: 10px;
+    animation: 3s spin linear infinite;
+    }
+@keyframes spin {
+    from{
+        --angle:0deg
+    }
+    to{
+        --angle:360deg
+    }
+    
+}
+.loginWrapper::before{
+    filter: blur(1.5rem);
+    opacity: 0.5; 
+}
+.loginContainer {
+    position: relative;
     background: rgb(255, 255, 255);
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
+    z-index: 1;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    width: 350px;
     text-align: center;
-    }
-  
-.loginBox input {
-    width: 95%;
-    padding: 3%;
-    margin: 5px 0;
-    border: 1px solid #000000;
-    border-radius: 5px;
-    }
+      }
 .loginBox label {
     color: #000000;
     text-align: left;
@@ -64,8 +92,14 @@
     font-weight: bold;
     display: block; /* Ensures it appears above the input */
     margin-bottom: 5px;
+}
+.loginBox input {
+    width: 95%;
+    padding: 3%;
+    margin: 5px 0;
+    border: 1px solid #000000;
+    border-radius: 5px;
     }
-  
 .forgotPassword a {
     display: flex;
     font-size: 0.9rem;
