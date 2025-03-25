@@ -1,11 +1,11 @@
 
 .mainContainer {
-    position: relative;
+    position: a;
     width: 100%;
     min-height: 100vh; /* Ensures it covers the viewport height */
   }
 .menuBar {
-    background-color: #ffffff;
+    background-color: #E3F369;
     padding: 15px 40px;
     display: flex; /* Make it a flex container */
     justify-content: space-between; /* Space out the links */
@@ -24,143 +24,33 @@
     font-size: 16px;
     }
 .welcomeTitle {
-    font-size: 35px;
+    font-size: 45px;
     color: #000000;
     text-align: center;
-    padding: 2%;
+    padding: 1%;
     }
 .welcomeDesc{
     font-size: 30px;
     text-align: center;
+    padding: 2%;
 
     }
 .welcomeTitleContainer {
     width: 100%;
     height: 100%;
     }
-.loginWrapper {
-    position:absolute;
-    top: 69%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    }
-@property --angle{
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-}
-      
-.loginWrapper::after,.loginWrapper::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: conic-gradient(from var(--angle),#199959,rgb(56, 56, 80),rgb(204, 214, 61),rgb(171, 207, 124),#199959);
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    padding: 5px;
-    z-index: -1; 
-    border-radius: 20px;
-    animation: 3s spin linear infinite;
-    }
-
-    @keyframes spin {
-    from{
-        --angle:0deg
-    }
-    to{
-        --angle:360deg
-    }
-    
-}
-.loginWrapper::before{
-    filter: blur(1.5rem);
-    opacity: 0.5; 
-    
-}
-
-.loginContainer {
-    position: relative;
-    background: rgb(255, 255, 255);
-    padding: 20px;
-    border-radius: 20px;
-    z-index: 1;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-.loginBox label {
-    color: #000000;
-    text-align: left;
-    font-size: 16px;
-    margin-left: 8px;
-    font-weight: bold;
-    display: block; /* Ensures it appears above the input */
-    padding: 1%;  
-}
-
-.loginBox input {
-    width: 95%;
-    padding: 3%;
-    margin: 5px 0;
-    border: 1px solid #000000;
-    border-radius: 12px;
-    }
-
-.forgotPassword a {
-    display: flex;
-    font-size: 1rem;
-    text-decoration: none;
-    color: #007bff;
-    margin-left: 8px;
-    padding: 1%;
-    }
-
-.signInButton {
-    width: 100px;
-    cursor: pointer;
-    margin-top: 10%;
-    
-
-    }
-  
-.registerButton {
-    background-color: #222;
-    width: 100px;
-    border-radius: 2px;
-    border:#000000;
-    cursor: pointer;
-    margin-top: 10%;
-    margin-left: 5%;
-    height: 21px;
-    color: #fff;
-
-
-
-}
-.registerButton:hover,
-.registerButton:focus {
-  opacity: .75;
-}
-
-
-
-
-
-
 
 /*featured bets section*/
 
 
 .featuredBetsContainer {
-    height: 800px;
-    background-color: #E3F369;
+    height: 900px;
+    background-image: url('./assets/image.png');
     padding: 1px;
     border-color: #000000;
 }
 .featuredBetsContainer h1 {
-    font-family:Verdana, Tahoma, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 40px;
     margin-left: 150px;
     text-align: left;
@@ -172,7 +62,7 @@
 
     margin-top: 1px;
     margin-left: 195px;
-    font-size: 25px;  
+    font-size: 20px;  
 
 }  
 * {
@@ -181,27 +71,28 @@
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-.viewAllBetsButton{
-    margin-left: 195px;
-    width: 240px;
-    padding: 14px;
-    margin-top: 25px;
-    background-color: #E3F369;
-    border-radius: 8px;
-    border-width: 1px;
-    border-style: solid;
+.featuredBetsButtons{
+  display: flex;
+  justify-content: center; /* or space-between / flex-start */
+  align-items: center;
+  gap: 20px; /* space between the buttons */
+  margin-top: 20px;
+  width: 100%;
 }
-
+.viewAllBetsButton,
 .exploreMoreButton{
     margin-left: 20px;
     width: 240px;
     padding: 14px;
     background-color: #000000;
     color: white;
-    border-radius: 8px;
+    border-radius: 20px;
     border-width: 1px;
     border-style: solid;
+}
+.viewAllBetsButton {
+  background-color: #E3F369;
+  color: #000;
 }
 
 .flexCardContainer {
@@ -211,6 +102,7 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: start;
+    gap:15px;
     
 }
 .flexCard {
@@ -234,27 +126,16 @@
 }
 
 .flexCard > .row > .icon {
-    background: #223;
-    color: white;
-    border-radius: 50%;
-    width: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    margin: 10px;
 }
 
 .flexCard > .row > .description {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    overflow: hidden;
-    height: 80px;
-    width: 520px;
-    opacity: 0;
-    transform: translateY(30px);
-    transition-delay: .3s;
-    transition: all .3s ease;
+    width: 100%;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .description p {

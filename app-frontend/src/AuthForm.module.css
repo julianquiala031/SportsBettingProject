@@ -1,0 +1,246 @@
+/* AuthForm.module.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --linear-grad: linear-gradient(to right, #141e30, #243b55);
+  --grad-clr1: #141e30;
+  --grad-clr2: #243b55;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f6f5f7;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    position: relative;
+    width: 850px;
+    max-width: 100%;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+                0 10px 10px rgba(0, 0, 0, 0.22);
+    transition: all 0.6s ease-in-out;
+  }
+  
+
+  .formContainer {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    padding: 0 50px;
+    text-align: center;
+  }
+
+  .signInContainer {
+    left: 0;
+    z-index: 2;
+    transition: all 0.6s ease-in-out;
+  }
+  
+
+  .signUpContainer {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+    transform: translateX(100%);
+    transition: all 0.6s ease-in-out;
+  }
+.rightPanelActive {
+    transform: translateX(0%);
+    transition: all 0.6s ease-in-out;
+    
+  }
+
+.container.rightPanelActive .signInContainer {
+  transform: translateX(-100%);
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.rightPanelActive .signUpContainer {
+  transform: translateX(0);
+  opacity: 1;
+  z-index: 5;
+  justify-content: center;
+}
+
+form {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: var(--grad-clr1);
+  margin-bottom: 10px;
+}
+
+.socialContainer {
+  margin: 20px 0;
+}
+
+.socialContainer a {
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+  color: #333;
+  text-decoration: none;
+}
+
+span {
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.infield {
+  width: 100%;
+  margin: 10px 0;
+}
+
+input {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #f3f3f3;
+  border: none;
+  outline: none;
+}
+
+.forgot {
+  font-size: 14px;
+  margin: 10px 0;
+  text-decoration: underline;
+  color: #555;
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid var(--grad-clr1);
+  background: var(--grad-clr2);
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 15px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #fff;
+  color: var(--grad-clr1);
+}
+
+.overlayContainer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+  }
+  
+
+.overlay {
+  background: var(--linear-grad);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.container.rightPanelActive .overlay {
+    transform: translateX(50%);
+  }
+  
+
+.overlayPanel {
+  position: relative;
+  width: 50%;
+  padding: 0 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  transition: transform 0.6s ease-in-out;
+}
+
+.overlayLeft {
+  transform: translateX(-20%);
+}
+
+.overlayRight {
+  transform: translateX(0);
+}
+
+.overlayPanel h1 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.overlayPanel p {
+  font-size: 14px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  color: #eee;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 10px 25px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ghost:hover {
+  background: white;
+  color: var(--grad-clr1);
+}
