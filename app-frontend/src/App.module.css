@@ -1,3 +1,4 @@
+
 .mainContainer {
     position: relative;
     width: 100%;
@@ -31,7 +32,7 @@
 .welcomeDesc{
     font-size: 30px;
     text-align: center;
-    padding: 2%;
+
     }
 .welcomeTitleContainer {
     width: 100%;
@@ -93,28 +94,31 @@
     color: #000000;
     text-align: left;
     font-size: 16px;
+    margin-left: 8px;
     font-weight: bold;
     display: block; /* Ensures it appears above the input */
-    margin-bottom: 5px;
-    padding: 1%;
+    padding: 1%;  
 }
+
 .loginBox input {
     width: 95%;
-    padding: 5%;
+    padding: 3%;
     margin: 5px 0;
     border: 1px solid #000000;
     border-radius: 12px;
     }
+
 .forgotPassword a {
     display: flex;
     font-size: 1rem;
     text-decoration: none;
     color: #007bff;
+    margin-left: 8px;
     padding: 1%;
     }
 
 .signInButton {
-    
+    width: 100px;
     cursor: pointer;
     margin-top: 10%;
     
@@ -122,10 +126,27 @@
     }
   
 .registerButton {
-    
+    background-color: #222;
+    width: 100px;
+    border-radius: 2px;
+    border:#000000;
     cursor: pointer;
     margin-top: 10%;
+    margin-left: 5%;
+    height: 21px;
+    color: #fff;
+
+
+
 }
+.registerButton:hover,
+.registerButton:focus {
+  opacity: .75;
+}
+
+
+
+
 
 
 
@@ -133,21 +154,26 @@
 
 
 .featuredBetsContainer {
+    height: 800px;
     background-color: #E3F369;
-    
-    
+    padding: 1px;
+    border-color: #000000;
 }
 .featuredBetsContainer h1 {
-    
-    text-align: center;
+    font-family:Verdana, Tahoma, sans-serif;
+    font-size: 40px;
+    margin-left: 150px;
+    text-align: left;
     font-size: 3rem;
     padding: 3%;
     
 }  
 .featuredBetsContainer h4 {
-    text-align: center;
+
+    margin-top: 1px;
+    margin-left: 195px;
     font-size: 25px;  
-    padding: 3%;
+
 }  
 * {
     box-sizing: border-box;
@@ -155,6 +181,29 @@
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.viewAllBetsButton{
+    margin-left: 195px;
+    width: 240px;
+    padding: 14px;
+    margin-top: 25px;
+    background-color: #E3F369;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.exploreMoreButton{
+    margin-left: 20px;
+    width: 240px;
+    padding: 14px;
+    background-color: #000000;
+    color: white;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+}
+
 .flexCardContainer {
     padding: 50px;
     width: 100%;
