@@ -82,9 +82,9 @@
                 <!-- 2 column grid layout with text inputs for the first and last names -->
                 <div class="row">
                   
-                  <% if (messages.error) { %>
+                  <% if (messages.length > 0) { %>
                     <div class="alert alert-danger">
-                      <strong><%= messages.error %> </strong>
+                      <strong><%= messages[0] %> </strong>
                     </div>
                   <% } %> 
 

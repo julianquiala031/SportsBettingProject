@@ -1,17 +1,54 @@
+// Description: This file is the main file that will run the 
+// server and handle all the requests.
+if (process.env.NODE_ENV !== 'production') { // if we are not in production mode
+    require('dotenv').config(); // require the dotenv package
+}
+
+// importing libraries that we installed using npm
 const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt'); // importing bcrypt for password hashing
 const path = require('path');
+const passport = require('passport'); // Import passport
+const initializePassport = require('./passport-config');
+const flash = require('express-flash');
+const session = require('express-session');
+const methodOverride = require('method-override');
+
+// TEMPORARILY STORING INFO IN ARR, MUST LINK TO DATABASE
+const users = [];
+
+initializePassport(
+    passport,
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+);
+
+app.use(express.urlencoded({ extended: false }));
+app.use(flash());
+app.use(session({
+        secret: process.env.SESSION_SECRET,
+        resave: false, // we wont resave the session var if nothing is changed
+        saveUninitialized: false
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride('_method'));
 
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// TEMPORARILY STORING INFO IN ARR, MUST LINK TO DATABASE
-const users = [];
-app.use(express.urlencoded({ extended: false }));
+// configuring the login post functionality
+app.post('/login', checkNotAuthenticated,passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}));
 
-app.post("/register", async (req, res) => {
+// configuring the register post functionality
+app.post("/register", checkNotAuthenticated,async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         users.push({
@@ -29,18 +66,41 @@ app.post("/register", async (req, res) => {
 });
 
 // creating routes
-app.get('/', (req, res) => {
-    res.render('index', { name: 'User' }); // Pass the name variable here
+app.get('/', checkAuthenticated,(req, res) => {
+    res.render('index', { name: req.user ? req.user.name : 'User' }); // Pass the name variable here
 });
 
-app.get('/login', (req, res) => {
-    res.render('login', { messages: {} }); // Pass the messages variable here
+app.get('/login', checkNotAuthenticated, (req, res) => {
+    res.render('login', { messages: req.flash('error') }); // Pass the messages variable here
 });
 
-app.get('/register', (req, res) => {
-    res.render('register', { messages: {} }); // Pass the messages variable here
+app.get('/register', checkNotAuthenticated,(req, res) => {
+    res.render('register', { messages: req.flash('error') }); // Pass the messages variable here
 });
 
+// configuring the logout functionality
+app.delete('/logout', (req, res) => {
+    req.logOut((err) => {
+        if (err) return next(err);
+        res.redirect('/');
+    });
+});
+
+// Checking if the user is authenticated
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
+
+// Checking if the user is not authenticated
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return res.redirect('/');
+    }
+    next();
+}
 
 // Server listening on port 3000
 app.listen(3000, () => {
