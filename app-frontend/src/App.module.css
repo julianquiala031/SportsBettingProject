@@ -26,11 +26,12 @@
     font-size: 35px;
     color: #000000;
     text-align: center;
-    
+    padding: 2%;
     }
 .welcomeDesc{
-    font-size: 20px;
+    font-size: 30px;
     text-align: center;
+    padding: 2%;
     }
 .welcomeTitleContainer {
     width: 100%;
@@ -38,7 +39,7 @@
     }
 .loginWrapper {
     position:absolute;
-    top: 60%;
+    top: 69%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 500px;
@@ -60,10 +61,11 @@
     translate: -50% -50%;
     padding: 5px;
     z-index: -1; 
-    border-radius: 10px;
+    border-radius: 20px;
     animation: 3s spin linear infinite;
     }
-@keyframes spin {
+
+    @keyframes spin {
     from{
         --angle:0deg
     }
@@ -75,42 +77,47 @@
 .loginWrapper::before{
     filter: blur(1.5rem);
     opacity: 0.5; 
+    
 }
+
 .loginContainer {
     position: relative;
     background: rgb(255, 255, 255);
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
     z-index: 1;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-      }
+}
 .loginBox label {
     color: #000000;
     text-align: left;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     display: block; /* Ensures it appears above the input */
     margin-bottom: 5px;
+    padding: 1%;
 }
 .loginBox input {
     width: 95%;
-    padding: 3%;
+    padding: 5%;
     margin: 5px 0;
     border: 1px solid #000000;
-    border-radius: 5px;
+    border-radius: 12px;
     }
 .forgotPassword a {
     display: flex;
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-decoration: none;
     color: #007bff;
+    padding: 1%;
     }
 
 .signInButton {
     
     cursor: pointer;
     margin-top: 10%;
+    
 
     }
   
@@ -119,10 +126,122 @@
     cursor: pointer;
     margin-top: 10%;
 }
+
+
+
+/*featured bets section*/
+
+
 .featuredBetsContainer {
     background-color: #E3F369;
-
-
+    
+    
 }
-  
+.featuredBetsContainer h1 {
+    
+    text-align: center;
+    font-size: 3rem;
+    padding: 3%;
+    
+}  
+.featuredBetsContainer h4 {
+    text-align: center;
+    font-size: 25px;  
+    padding: 3%;
+}  
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.flexCardContainer {
+    padding: 50px;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: start;
+    
+}
+.flexCard {
+    width: 80px;
+    border-radius: .75rem;
+    background-size: cover;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 2rem;
+    margin: 0 10px;
+    display: flex;
+    align-items: flex-end;
+    transition: .6s cubic-bezier(.28,-0.03,0,.99);
+    box-shadow: 0px 10px 30px -5px rgba(0,0,0,0.8);
+}
+
+.flexCard > .row {
+    color: white;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.flexCard > .row > .icon {
+    background: #223;
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+}
+
+.flexCard > .row > .description {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    height: 80px;
+    width: 520px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition-delay: .3s;
+    transition: all .3s ease;
+}
+
+.description p {
+    color: #b0b0ba;
+    padding-top: 5px;
+}
+
+.description h4 {
+    text-transform: uppercase;
+}
+
+.flexCardContainer input {
+    display: none;
+    
+}
+
+.flexCardContainer input:checked + label {
+    width: 600px;
+}
+
+.flexCardContainer input:checked + label .description {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.flexCard[for="c1"] {
+    background-image: url('./assets/messi.png');
+}
+.flexCard[for="c2"] {
+    background-image: url('./assets/heat.png');
+}
+.flexCard[for="c3"] {
+    background-image: url('./assets/soccer.png');
+}
+.flexCard[for="c4"] {
+    background-image: url('./assets/sprbwl.png');
+}
+
   
