@@ -107,7 +107,109 @@ ALTER TABLE ONLY sportsbetdb.users ALTER COLUMN id SET DEFAULT nextval('sportsbe
 ALTER TABLE ONLY sportsbetdb.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
+BEGIN; 
 
+CREATE TABLE sportsbetdb.nbagames(
+    id SERIAL PRIMARY KEY NOT NULL,
+    sport VARCHAR(100) NOT NULL,
+    league VARCHAR(100) NOT NULL,
+    home_team VARCHAR(100) NOT NULL,
+    away_team VARCHAR(100) NOT NULL,
+    startTime TIMESTAMPTZ NOT NULL,
+    status VARCHAR(100) NOT NULL,
+    home_points INT,
+    away_points INT, 
+    home_wins INT,
+    home_losses INT,
+    away_wins INT,
+    away_losses INT
+);
+
+CREATE TABLE sportsbetdb.nba_linescores(
+    id SERIAL PRIMARY KEY NOT NULL,
+    nbagame_id INT NOT NULL,
+    team_type VARCHAR(100),
+    quarter1 INT,
+    quarter2 INT,
+    quarter3 INT,
+    quarter4 INT,
+    FOREIGN KEY (nbagame_id) REFERENCES sportsbetdb.nbagames(id) ON DELETE CASCADE
+);
+
+COMMIT;
+
+BEGIN;
+
+CREATE TABLE sportsbetdb.nflgames(
+    id SERIAL PRIMARY KEY NOT NULL,
+    sport VARCHAR(100) NOT NULL,
+    home_team VARCHAR(100) NOT NULL,
+    away_team VARCHAR(100) NOT NULL
+);
+
+
+CREATE TABLE sportsbetdb.nfl_scores(
+    id SERIAL PRIMARY KEY NOT NULL,
+    nflgame_id INT NOT NULL,
+    team_type VARCHAR(100),
+    q1 INT, 
+    q2 INT,
+    q3 INT,
+    q4 INT,
+    overtime INT,
+    total INT,
+    FOREIGN KEY (nflgame_id) REFERENCES sportsbetdb.nflgames(id) ON DELETE CASCADE
+);
+
+COMMIT;
+
+BEGIN;
+
+CREATE TABLE sportsbetdb.mlbgames(
+     id SERIAL PRIMARY KEY NOT NULL,
+    sport VARCHAR(100) NOT NULL,
+    league VARCHAR(100) NOT NULL,
+    home_team VARCHAR(100) NOT NULL,
+    away_team VARCHAR(100) NOT NULL,
+    date TIMESTAMPTZ,
+    status VARCHAR(100) NOT NULL,
+    home_errors INT,
+    away_errors INT
+);
+
+CREATE TABLE sportsbetdb.mlb_scores(
+    id SERIAL PRIMARY KEY NOT NULL,
+    mlbgame_id INT NOT NULL,
+    team_type VARCHAR(100),
+    hits INT,
+    errors INT,
+    in1 INT,
+    in2 INT,
+    in3 INT,
+    in4 INT,
+    in5 INT,
+    in6 INT,
+    in7 INT,
+    in8 INT,
+    in9 INT,
+    extra INT,
+    total INT,
+    FOREIGN KEY (mlbgame_id) REFERENCES sportsbetdb.mlbgames(id) ON DELETE CASCADE
+);
+
+COMMIT;
+/*
+CREATE TABLE sportsbetdb.odds(
+    id SERIAL PRIMARY KEY,
+    game_id INT REFERENCES sportsbetdb.games(id) ON DELETE CASCADE,
+    bookmaker VARCHAR(100),
+    market VARCHAR(100),
+    home_odds FLOAT,
+    away_odds FLOAT,
+    draw_odds FLOAT,
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+*/
 
 --
 -- PostgreSQL database dump complete
