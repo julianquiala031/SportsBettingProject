@@ -1,7 +1,8 @@
 import express, {Request, Response, NextFunction} from 'express';
 import { forgotPassword } from './authenticationController';
 import { resetPassword } from './authenticationController'; 
-import { userLogin } from './authenticationController';
+import { userLogin } from './authenticationController';    
+
 
 const router = express.Router(); //creates router obj for auth feature
 

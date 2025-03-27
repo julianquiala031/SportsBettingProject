@@ -198,18 +198,87 @@ CREATE TABLE sportsbetdb.mlb_scores(
 );
 
 COMMIT;
-/*
-CREATE TABLE sportsbetdb.odds(
+
+BEGIN;
+
+CREATE TABLE sportsbetdb.nbabets (
     id SERIAL PRIMARY KEY,
-    game_id INT REFERENCES sportsbetdb.games(id) ON DELETE CASCADE,
-    bookmaker VARCHAR(100),
-    market VARCHAR(100),
-    home_odds FLOAT,
-    away_odds FLOAT,
-    draw_odds FLOAT,
-    updated_at TIMESTAMPTZ DEFAULT NOW()
+    user_id INT NOT NULL,
+    game_id INT NOT NULL,
+    bet_type VARCHAR(50) NOT NULL,         
+    bet_side VARCHAR(50) NOT NULL,         
+    amount NUMERIC(10, 2) NOT NULL,       
+    odds NUMERIC(5, 2) NOT NULL,           
+    potential_payout NUMERIC(10, 2),       
+    status VARCHAR(20) DEFAULT 'pending',  
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES sportsbetdb.users(id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES sportsbetdb.nbagames(id) ON DELETE CASCADE
 );
-*/
+
+CREATE TABLE sportsbetdb.nbabet_details (
+    id SERIAL PRIMARY KEY,
+    bet_id INT NOT NULL,
+    condition VARCHAR(100),                -- e.g., "player_scores_over_20", "team_total_points"
+    value NUMERIC(10, 2),                  -- Value to hit (e.g., 20 points)
+    outcome BOOLEAN DEFAULT NULL,          -- Whether the condition is met
+    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.bets(id) ON DELETE CASCADE
+);
+
+COMMIT;
+
+CREATE TABLE sportsbetdb.nflbets (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id INT NOT NULL,
+    bet_type VARCHAR(50) NOT NULL,         
+    bet_side VARCHAR(50) NOT NULL,         
+    amount NUMERIC(10, 2) NOT NULL,       
+    odds NUMERIC(5, 2) NOT NULL,           
+    potential_payout NUMERIC(10, 2),       
+    status VARCHAR(20) DEFAULT 'pending',  
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES sportsbetdb.users(id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES sportsbetdb.nflgames(id) ON DELETE CASCADE
+);
+
+CREATE TABLE sportsbetdb.nflbet_details (
+    id SERIAL PRIMARY KEY,
+    bet_id INT NOT NULL,
+    condition VARCHAR(100),                -- e.g., "player_scores_over_20", "team_total_points"
+    value NUMERIC(10, 2),                  -- Value to hit (e.g., 20 points)
+    outcome BOOLEAN DEFAULT NULL,          -- Whether the condition is met
+    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.bets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE sportsbetdb.mlbbets (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    game_id INT NOT NULL,
+    bet_type VARCHAR(50) NOT NULL,         
+    bet_side VARCHAR(50) NOT NULL,         
+    amount NUMERIC(10, 2) NOT NULL,       
+    odds NUMERIC(5, 2) NOT NULL,           
+    potential_payout NUMERIC(10, 2),       
+    status VARCHAR(20) DEFAULT 'pending',  
+    created_at TIMESTAMP DEFAULT NOW(),
+    FOREIGN KEY (user_id) REFERENCES sportsbetdb.users(id) ON DELETE CASCADE,
+    FOREIGN KEY (game_id) REFERENCES sportsbetdb.mlbgames(id) ON DELETE CASCADE
+);
+
+CREATE TABLE sportsbetdb.mlbbet_details (
+    id SERIAL PRIMARY KEY,
+    bet_id INT NOT NULL,
+    condition VARCHAR(100),                -- e.g., "player_scores_over_20", "team_total_points"
+    value NUMERIC(10, 2),                  -- Value to hit (e.g., 20 points)
+    outcome BOOLEAN DEFAULT NULL,          -- Whether the condition is met
+    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.bets(id) ON DELETE CASCADE
+);
+
+COMMIT;
+
+   
+
 
 --
 -- PostgreSQL database dump complete

@@ -10,3 +10,5 @@ const pool = new Pool({
 export const query = async (text: string, params: any[]): Promise<QueryResult<any>> => {
     return pool.query(text, params);
 };
+
+export default pool; 
