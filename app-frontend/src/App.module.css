@@ -1,16 +1,65 @@
+.scrollContainer{
+    height:100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+.section{
+    height: 100vh;
+    scroll-snap-align: start;
+}
 
-.mainContainer {
+.LoginContainer {
     position: a;
     width: 100%;
     min-height: 100vh; /* Ensures it covers the viewport height */
+    
   }
 .menuBar {
-    background-color: #ffffff;
+    background-color: #e3f369;
     padding: 15px 40px;
     display: flex; /* Make it a flex container */
     justify-content: space-between; /* Space out the links */
     justify-content: center;
+    position: relative;
+    
   }
+  @property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  .menuBar::after, .menuBar::before{
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    background-image: conic-gradient(from var(--angle) , transparent, #000000, transparent);
+    animation: 3s spin linear infinite alternate; 
+    padding: 5px;
+  }
+    .menu::before{
+    filter:blur(1.5rem);
+    opacity: 0.5;
+
+}
+ @keyframes spin{
+    from{
+        --angle:0deg;
+    }
+    to{
+        --angle:360deg;
+    
+ }
+ }
   /* Container for the links */
 .navLinks {
     display: flex;
@@ -28,6 +77,10 @@
     color: #000000;
     text-align: center;
     padding: 1%;
+    line-height: 1;
+    margin-top: 0;
+	
+	position: relative;
     }
 .welcomeDesc{
     font-size: 30px;
@@ -36,8 +89,7 @@
 
     }
 .welcomeTitleContainer {
-    width: 100%;
-    height: 100%;
+    
     }
 /*featured bets section*/
 .featuredBetsSection {
@@ -45,6 +97,9 @@
     width: 100%;
     min-height: 70vh;
     overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
   
   .blurBackground {
@@ -62,7 +117,7 @@
 
 
 .featuredBetsContainer {
-    height: 900px;
+    height: 100vh;
 
     
     padding: 1px;
