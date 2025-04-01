@@ -1,8 +1,8 @@
 .reviewsSection {
     background-image: url('./assets/image.png');
-    padding: 100px;
+    height: 100vh;
     text-align: center;
-    
+    padding: 200px;
   }
   
   .reviewsSection h2 {

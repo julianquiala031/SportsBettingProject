@@ -9,18 +9,23 @@ import ReviewSection from './ReviewSection';
 function App() {
   return (
     <>
-      {/* ✅ Background wrapper for the top section */}
-      <div className={styles.mainContainer} 
-        style={{ 
-          backgroundImage: `url(${backgroundImage})`, 
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          minHeight: "70vh",
-          width: "100%",
-        }}
-      >
-        {/* ✅ Menu Bar */}
+    <div className={styles.scrollContainer}>
+   
+      <section 
+          className={`${styles.LoginContainer} ${styles.section}`}
+          style={{
+            backgroundImage: `url(${backgroundImage})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            minHeight: "70vh",
+            width: "100%",
+            
+          }}
+          
+        >
+          
+        {/*  Menu Bar */}
         <section className={styles.menuBar}>
           <div className={styles.navLinks}>
             <a href="#">Social Links</a>
@@ -31,8 +36,8 @@ function App() {
             <a href="#">Contact</a>
           </div>
         </section>
-
-        {/* ✅ Welcome Title */}  
+        
+        {/* Welcome Title */}  
         <section className={styles.welcomeTitleContainer}>
             <div className={styles.welcomeTitle}>
                   <h1>Welcome to BetterBets</h1>
@@ -43,8 +48,8 @@ function App() {
             </div>
         </section>
         <AuthForm/>
-        </div>
-        <section className={styles.featuredBetsSection}>
+        </section>
+      <section className={`${styles.featuredBetsSection} ${styles.section}`}>
             <div className={styles.blurBackground}
                 style={{backgroundImage: `url(${backgroundImage2})` }}
                 >
@@ -111,9 +116,11 @@ function App() {
                 </label>
                 </div>
                 </section>
-                </section>
-            <ReviewSection/>
-           
+        </section>
+      <section className={`${styles.reviewSectionforScroll} ${styles.section}`}>
+      <ReviewSection/>
+      </section>
+    </div>
         
 
 
