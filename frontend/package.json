@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@types/react": "^19.0.12",
+    "socket.io-client": "^4.8.1"
+  }
+}
