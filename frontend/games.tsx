@@ -1,23 +1,32 @@
 import React, {useState, useEffect} from 'react';
-import {io} from "socket.io-client"; 
 
-const socket = io("http://localhost:3000");
+//Current implementation fetches the entire gamesList at once
 
-function viewGames(){
+const gamesList = () => {
     const [games, setGames] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        socket.on("update", (updates) => {
-            setGames(updates);
-        });
+    const getGames = async () => {
+        try{
+            const res = await fetch('http:localhost:3000/games/get-NBA-Game');
+            const data = await res.json();
+            setGames(data);
+            setLoading(false); 
 
-        return() => {
-            socket.off("update");
-        };
-    }, []);
+        }catch(error){
+            console.error('There was an error retrieving games to frontend: ', error);
+        }
+    };
+
+
+
+useEffect(() => {
+    getGames();
+
+    const interval = setInterval(getGames, 30000);
+
+    return () => clearInterval(interval);
+}, []);
 
 
 }
-
-
-export default viewGames;
