@@ -1,5 +1,5 @@
 import express, {Request, Response, NextFunction} from 'express';
-import {getNBAGame, getNFLGame, getMLBGame} from './gameController'; 
+import {getNBAGame, getNFLGame, getMLBGame, viewNBAGame} from './gameController'; 
 
 const router = express.Router(); 
 
@@ -28,6 +28,15 @@ router.get(
         next();
     },
     getMLBGame,
+);
+
+router.get(
+    '/viewNBAgame',
+    (req: Request, res: Response, next: NextFunction) => {
+        console.log('GET route for viewGames hit.');
+        next();
+    },
+    viewNBAGame
 );
 
 export default router; 

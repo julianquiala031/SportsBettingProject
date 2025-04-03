@@ -199,7 +199,7 @@ export const getMLBGame = async (data: MLBGameData[]): Promise<any> =>{
 
 for (const game of games){
 
-  console.log('in1', game.scores.home.innings.inning_1);
+  //console.log('in1', game.scores.home.innings.inning_1);
   const gameRes = await db.query(
     `INSERT INTO mlbgames (sport, league, home_team, away_team, date, status, 
     home_errors, away_errors) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id;`,
@@ -235,4 +235,13 @@ for (const game of games){
 
 
 }
+}
+
+export const viewNBAGame = async (): Promise<any> => {
+  const today = new Date();
+  console.log("Game Service hit for viewNBAGame.");
+  await db.query(
+  `SELECT * FROM nbagames WHERE starttime = $1;`, 
+  [today] 
+  );
 }

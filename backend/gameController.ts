@@ -9,7 +9,6 @@ export const getNBAGame = async(req: Request, res: Response): Promise<NBAGameDat
 
     try{
         console.log('GET route for getGame hit');
-       const league = '12';
        const season = '2023';
        const url = `https://v2.nba.api-sports.io/games?season=${season}`
         const response = await fetch(url,{
@@ -92,3 +91,14 @@ export const getMLBGame = async(req: Request, res: Response): Promise<MLBGameDat
 
 
 }
+
+export const viewNBAGame = async (res: Response, req: Request): Promise<any> => {
+    console.log('Controller for viewNbaGame hit.');
+     try{
+        //const status: string = 'ongoing'; 
+        await gameService.viewNBAGame();
+        //res.status(200).json({message: 'Game has been retrieved for viewing successfully.'});
+     }catch(error){
+        console.error('Error in viewing NBA game: ', error);
+     }
+  }
