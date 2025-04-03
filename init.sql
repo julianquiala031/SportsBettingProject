@@ -222,10 +222,12 @@ CREATE TABLE sportsbetdb.nbabet_details (
     condition VARCHAR(100),                -- e.g., "player_scores_over_20", "team_total_points"
     value NUMERIC(10, 2),                  -- Value to hit (e.g., 20 points)
     outcome BOOLEAN DEFAULT NULL,          -- Whether the condition is met
-    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.bets(id) ON DELETE CASCADE
+    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.nbabets(id) ON DELETE CASCADE
 );
 
 COMMIT;
+
+BEGIN; 
 
 CREATE TABLE sportsbetdb.nflbets (
     id SERIAL PRIMARY KEY,
@@ -248,7 +250,7 @@ CREATE TABLE sportsbetdb.nflbet_details (
     condition VARCHAR(100),                -- e.g., "player_scores_over_20", "team_total_points"
     value NUMERIC(10, 2),                  -- Value to hit (e.g., 20 points)
     outcome BOOLEAN DEFAULT NULL,          -- Whether the condition is met
-    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.bets(id) ON DELETE CASCADE
+    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.nflbets(id) ON DELETE CASCADE
 );
 
 CREATE TABLE sportsbetdb.mlbbets (
@@ -272,7 +274,7 @@ CREATE TABLE sportsbetdb.mlbbet_details (
     condition VARCHAR(100),                -- e.g., "player_scores_over_20", "team_total_points"
     value NUMERIC(10, 2),                  -- Value to hit (e.g., 20 points)
     outcome BOOLEAN DEFAULT NULL,          -- Whether the condition is met
-    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.bets(id) ON DELETE CASCADE
+    FOREIGN KEY (bet_id) REFERENCES sportsbetdb.mlbbets(id) ON DELETE CASCADE
 );
 
 COMMIT;
