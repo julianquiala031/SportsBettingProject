@@ -5,14 +5,14 @@ import * as betService from './betService';
 export const placeBet = async(req: Request, res: Response): Promise<any> => {
 
     try{
-        const {user_id, game_id, bet_type, bet_side, amount, odds } = req.body;
-         if(!user_id ||  !game_id || ! bet_type || !bet_side || !amount || !odds){ 
+        const {user_id, game_id, gameID, bet_type, bet_side, amount, odds } = req.body;
+         if(!user_id ||  !game_id || !gameID || ! bet_type || !bet_side || !amount || !odds){ 
             res.status(400).json({error: "Missing fields."}); 
          }
 
          const bet = req.body; 
 
-         await betService.placeBet(user_id, game_id, bet_type, bet_side, amount, odds); 
+         await betService.placeBet(user_id, game_id, gameID, bet_type, bet_side, amount, odds); 
          res.status(200).json({message: "Bet placement successful!"}); 
          return bet; 
     }catch(error){

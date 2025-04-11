@@ -11,8 +11,8 @@ export const getNBAGame = async(req: Request, res: Response): Promise<NBAGameDat
         console.log('GET route for getGame hit');
 
 
-       const season = '2023';
-       const url = `https://v2.nba.api-sports.io/games?season=${season}`
+       const date = new Date().toISOString().split('T')[0];
+       const url = `https://v2.nba.api-sports.io/games?date=${date}`
         const response = await fetch(url,{
             method: "GET",
             headers: {

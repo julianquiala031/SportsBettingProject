@@ -377,15 +377,15 @@ export const updateNBAGame = async (req: Request, res: Response): Promise<any> =
 
   const games= gameRes.rows;
 
-  const gameIDS = games.map(g=> g.id);
+  const gameIDS = games.map(g=> g.gameID);
 
   const scoresRes = await db.query(
-    `SELECT * FROM nba_linescores WHERE game_id = ANY($1::int[]);`,
+    `SELECT * FROM nba_linescores WHERE nba_linescores.gameID = ANY($1::int[]);`,
     [gameIDS]
   );
 
   const betsRes = await db.query(
-    `SELECT * FROM nbabets WHERE game_id = ANY($1::int[]);`,
+    `SELECT * FROM nbabets WHERE nbabets.gameID = ANY($1::int[]);`,
     [gameIDS]
   );
 
@@ -437,12 +437,12 @@ export const updateNFlGame = async (req: Request, res: Response): Promise<any>  
   const gameIDS = games.map(g=> g.id);
 
   const scoresRes = await db.query(
-    `SELECT * FROM nfl_scores WHERE game_id = ANY($1::int[]);`,
+    `SELECT * FROM nfl_scores WHERE nfl_scores.gameID = ANY($1::int[]);`,
     [gameIDS]
   );
 
   const betsRes = await db.query(
-    `SELECT * FROM nflbets WHERE game_id = ANY($1::int[]);`,
+    `SELECT * FROM nflbets WHERE nflbets.gameID = ANY($1::int[]);`,
     [gameIDS]
   );
 
@@ -464,25 +464,38 @@ export const updateNFlGame = async (req: Request, res: Response): Promise<any>  
     const awayScores = gameScores.find(ls => ls.team_type === 'away');
   
     const odds = betsRes.rows.find((o: nflOdds) => o.nflgame_id === game.id);
-  
+  /*
     if (!homeScores || !awayScores) {
       throw new Error(`Scores missing for game ID: ${game.id}`);
     }
+      */
+
+    const emptyScore = {
+      quarter_1: 0,
+      quarter_2: 0,
+      quarter_3: 0,
+      quarter_4: 0,
+      overtime: null,
+      total: null
+    }
   
-    const formatScore = (s: nflScores) => ({
+    const formatScore = (s: nflScores | undefined) => {
+      if(!s) return emptyScore; 
+      return {
       quarter_1: s.quarter_1,
       quarter_2: s.quarter_2,
       quarter_3: s.quarter_3,
       quarter_4: s.quarter_4,
       overtime: s.overtime,
       total: s.total,
-    });
+      };
+    };
   
     return {
       ...game,
       scores: {
-        home: formatScore(homeScores),
-        away: formatScore(awayScores),
+        home: formatScore(homeScores!),
+        away: formatScore(awayScores!),
       },
       odds: odds?.bookmakers ? { bookmakers: odds.bookmakers } : undefined,
     };
@@ -496,7 +509,7 @@ export const updateMLBGame = async (req: Request, res: Response): Promise<any> =
   if(!lastFetched) throw new Error('Invalid or missing since parameter.');
 
   const gameRes = await db.query(
-    `SELECT * FROM mlbgames WHERE updated_at $1 ORDER BY updated_at DESC;`,
+    `SELECT * FROM mlbgames WHERE updated_at > $1 ORDER BY updated_at DESC;`,
     [lastFetched]
   );
 
@@ -505,12 +518,12 @@ export const updateMLBGame = async (req: Request, res: Response): Promise<any> =
   const gameIDS = games.map(g=> g.id);
 
   const scoresRes = await db.query(
-    `SELECT * FROM mlb_scores WHERE game_id = ANY($1::int[]);`,
+    `SELECT * FROM mlb_scores WHERE mlb_scores.gameID = ANY($1::int[]);`,
     [gameIDS]
   );
 
   const betsRes = await db.query(
-    `SELECT * FROM mlbbets WHERE game_id = ANY($1::int[]);`,
+    `SELECT * FROM mlbbets WHERE mlbbets.gameID = ANY($1::int[]);`,
     [gameIDS]
   );
 
