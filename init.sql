@@ -111,6 +111,7 @@ BEGIN;
 
 CREATE TABLE sportsbetdb.nbagames(
     id SERIAL PRIMARY KEY NOT NULL,
+    gameID INT NOT NULL,
     sport VARCHAR(100) NOT NULL,
     league VARCHAR(100) NOT NULL,
     home_team VARCHAR(100) NOT NULL,
@@ -122,17 +123,22 @@ CREATE TABLE sportsbetdb.nbagames(
     home_wins INT,
     home_losses INT,
     away_wins INT,
-    away_losses INT
+    away_losses INT,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (gameID)
 );
 
 CREATE TABLE sportsbetdb.nba_linescores(
     id SERIAL PRIMARY KEY NOT NULL,
+    gameID INT NOT NULL,
     nbagame_id INT NOT NULL,
     team_type VARCHAR(100),
     quarter1 INT,
     quarter2 INT,
     quarter3 INT,
     quarter4 INT,
+     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (gameID, team_type),
     FOREIGN KEY (nbagame_id) REFERENCES sportsbetdb.nbagames(id) ON DELETE CASCADE
 );
 
@@ -142,14 +148,18 @@ BEGIN;
 
 CREATE TABLE sportsbetdb.nflgames(
     id SERIAL PRIMARY KEY NOT NULL,
+    gameID INT NOT NULL,
     sport VARCHAR(100) NOT NULL,
     home_team VARCHAR(100) NOT NULL,
-    away_team VARCHAR(100) NOT NULL
+    away_team VARCHAR(100) NOT NULL,
+     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (gameID)
 );
 
 
 CREATE TABLE sportsbetdb.nfl_scores(
     id SERIAL PRIMARY KEY NOT NULL,
+    gameID INT NOT NULL,
     nflgame_id INT NOT NULL,
     team_type VARCHAR(100),
     q1 INT, 
@@ -158,6 +168,8 @@ CREATE TABLE sportsbetdb.nfl_scores(
     q4 INT,
     overtime INT,
     total INT,
+    UNIQUE (gameID),
+     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (nflgame_id) REFERENCES sportsbetdb.nflgames(id) ON DELETE CASCADE
 );
 
@@ -167,6 +179,7 @@ BEGIN;
 
 CREATE TABLE sportsbetdb.mlbgames(
      id SERIAL PRIMARY KEY NOT NULL,
+     gameID INT NOT NULL,
     sport VARCHAR(100) NOT NULL,
     league VARCHAR(100) NOT NULL,
     home_team VARCHAR(100) NOT NULL,
@@ -174,11 +187,14 @@ CREATE TABLE sportsbetdb.mlbgames(
     date TIMESTAMPTZ,
     status VARCHAR(100) NOT NULL,
     home_errors INT,
-    away_errors INT
+    away_errors INT,
+     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (gameID)
 );
 
 CREATE TABLE sportsbetdb.mlb_scores(
     id SERIAL PRIMARY KEY NOT NULL,
+    gameID INT NOT NULL,
     mlbgame_id INT NOT NULL,
     team_type VARCHAR(100),
     hits INT,
@@ -194,6 +210,8 @@ CREATE TABLE sportsbetdb.mlb_scores(
     in9 INT,
     extra INT,
     total INT,
+    UNIQUE (gameID, team_type),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (mlbgame_id) REFERENCES sportsbetdb.mlbgames(id) ON DELETE CASCADE
 );
 

@@ -9,6 +9,8 @@ export const getNBAGame = async(req: Request, res: Response): Promise<NBAGameDat
 
     try{
         console.log('GET route for getGame hit');
+
+
        const season = '2023';
        const url = `https://v2.nba.api-sports.io/games?season=${season}`
         const response = await fetch(url,{
@@ -92,13 +94,39 @@ export const getMLBGame = async(req: Request, res: Response): Promise<MLBGameDat
 
 }
 
-export const viewNBAGame = async (res: Response, req: Request): Promise<any> => {
-    console.log('Controller for viewNbaGame hit.');
+export const updateNBAGame = async (req: Request, res: Response): Promise<any> => {
+    console.log('Controller for updatingNbaGame hit.');
      try{
+
+
         //const status: string = 'ongoing'; 
-        await gameService.viewNBAGame();
+        const nbagames = await gameService.updateNBAGame(req, res);
+        res.status(200).json({message: "Success updating games."});
+        return res.status(nbagames); 
         //res.status(200).json({message: 'Game has been retrieved for viewing successfully.'});
      }catch(error){
-        console.error('Error in viewing NBA game: ', error);
+        console.error('Error in updating NBA game: ', error);
      }
+  }
+
+  export const updateNFLGame = async (req: Request, res: Response): Promise<any> => {
+    console.log('Controller for updateNFLgame hit.');
+    try{
+        const nflgames = await gameService.updateNFlGame(req, res);
+        res.status(200).json({message: 'Success in updating NFL games.'});
+        return nflgames;
+    }catch(error){
+        console.error('Error in updating NFL game: ', error);
+    }
+  }
+
+  export const updateMLBGame = async (req: Request, res: Response): Promise<any> =>{
+    console.log('Controller hit for updating MLB games.');
+    try{
+        const mlbgames = await gameService.updateMLBGame(req, res);
+        res.status(200).json({message: "Success updating MLB games."});
+        return mlbgames; 
+    }catch(error){
+        console.error('Error in updating MLB games: ', error);
+    }
   }

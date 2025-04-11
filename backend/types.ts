@@ -125,9 +125,80 @@ export type NBAGame = {
     }
   };
 
+  export type LineScore = {
+    id: number;
+    nbagame_id: number;
+    team_type: 'home' | 'away';
+    quarter1: number;
+    quarter2: number;
+    quarter3: number;
+    quarter4: number;
+  };
+
+  export type nflScores = {
+    id: number;
+    nflgame_id: number;
+    team_type: 'home' | 'away';
+    quarter_1: number;
+    quarter_2: number;
+    quarter_3: number;
+    quarter_4: number;
+    overtime: number | null;
+    total: number | null;
+  }
+
+  export type mlbScores = {
+    id: number;
+    mlbgame_id: number;
+    team_type: 'home' | 'away';
+    hits: number;
+          errors: number;
+          innings: {
+              1: number;
+              2: number;
+              3: number;
+              4: number;
+              5: number;
+              6: number;
+              7: number;
+              8: number;
+              9: number;
+              extra: number;
+  }
+}
+
+  
+  export type Odds = {
+    id: number;
+    nbagame_id: number;
+    home_odds: number;
+    away_odds: number;
+  }
+
+  export type nflOdds = {
+    id: number,
+    nflgame_id: number,
+    home_odds: number,
+    away_odds: number
+  }
+
+  export type mlbOdds = {
+    id: number,
+    mlbgame_id: number,
+    home_odds: number,
+    away_odds: number
+  }
+
+  
+
 
 export type NFLGameData = {
-    id: number;
+    game: {
+      id: number;
+      date:{
+        date: string;
+      };
+    };
     sport: string;
     teams:{
       home: {
