@@ -14,6 +14,7 @@ const nbaGamesList = () => {
         try{
              const res = await fetch(`http://localhost:3000/game/get-NBA-Game`); //large game pull endpoint 
              const data = await res.json();
+             console.log('Fetched games: ', data);
              setGames(data.games);
              setLastFetch(Date.now()); //sets Since timestamp
         }catch(error){
