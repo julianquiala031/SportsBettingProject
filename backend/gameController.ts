@@ -102,7 +102,7 @@ export const updateNBAGame = async (req: Request, res: Response): Promise<any> =
         //const status: string = 'ongoing'; 
         const nbagames = await gameService.updateNBAGame(req, res);
         res.status(200).json({message: "Success updating games."});
-        return res.status(nbagames); 
+        return res.status(200).json({nbagames}); 
         //res.status(200).json({message: 'Game has been retrieved for viewing successfully.'});
      }catch(error){
         console.error('Error in updating NBA game: ', error);
@@ -114,7 +114,7 @@ export const updateNBAGame = async (req: Request, res: Response): Promise<any> =
     try{
         const nflgames = await gameService.updateNFlGame(req, res);
         res.status(200).json({message: 'Success in updating NFL games.'});
-        return nflgames;
+        return res.json({nflgames});
     }catch(error){
         console.error('Error in updating NFL game: ', error);
     }
@@ -125,7 +125,7 @@ export const updateNBAGame = async (req: Request, res: Response): Promise<any> =
     try{
         const mlbgames = await gameService.updateMLBGame(req, res);
         res.status(200).json({message: "Success updating MLB games."});
-        return mlbgames; 
+        return res.json({mlbgames}); 
     }catch(error){
         console.error('Error in updating MLB games: ', error);
     }
