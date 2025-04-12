@@ -1,6 +1,7 @@
 /* AuthForm.module.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400|Playfair+Display:400,700,400italic|Libre+Baskerville:400,700,400italic|Muli:300,400|Open+Sans:400,300,700|Oswald:400,700|Raleway:400,100,300,700|Montserrat:400,700|Merriweather:400,300,300italic,400italic,700|Bree+Serif|Vollkorn:400italic,400,700|Abril+Fatface|Cardo:400,400italic);
 
 :root {
   --linear-grad: linear-gradient(to right, #7c9c55, #e475c8);
@@ -24,7 +25,7 @@ body {
 
   .container {
     position: relative;
-    width: 850px;
+    width: 1050px;
     max-width: 100%;
     min-height: 500px;
     display: flex;
@@ -70,12 +71,14 @@ body {
     transform: translateX(0%);
     transition: all 0.6s ease-in-out;
     
+    
   }
 
 .container.rightPanelActive .signInContainer {
   transform: translateX(-100%);
   opacity: 0;
   z-index: 1;
+  
 }
 
 .container.rightPanelActive .signUpContainer {
@@ -83,6 +86,7 @@ body {
   opacity: 1;
   z-index: 5;
   justify-content: center;
+  
 }
 
 form {
@@ -91,11 +95,13 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 h1 {
   color: var(--grad-clr1);
   margin-bottom: 10px;
+  
 }
 
 .socialContainer {
@@ -113,6 +119,7 @@ h1 {
   width: 40px;
   color: #333;
   text-decoration: none;
+  
 }
 
 span {
@@ -170,7 +177,6 @@ button:hover {
     transition: transform 0.6s ease-in-out;
     z-index: 100;
   }
-  
 
 .overlay {
   background: var(--linear-grad);
@@ -186,17 +192,23 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .container.rightPanelActive .overlay {
-    transform: translateX(50%);
+  opacity: 1;
+  transform: translateX(50%);
+  transition: transform 0.6s ease-in-out;
+  will-change: transform, opacity;
+  padding-left: 12vh;
+  
   }
   
 
 .overlayPanel {
+  will-change: transform;
   position: relative;
   width: 50%;
-  padding: 0 40px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -204,7 +216,7 @@ button:hover {
   align-items: center;
   height: 100%;
   width: 50%;
-  transition: transform 0.6s ease-in-out;
+  transition: transform 0.7s ease-in-out;
 }
 
 .overlayLeft {

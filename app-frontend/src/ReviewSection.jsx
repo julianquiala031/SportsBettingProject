@@ -43,7 +43,7 @@ const reviews = [
 
 export default function ReviewSection(){
 return (
-            <section className={styles.reviewsSection}>
+        <section className={styles.reviewsSection}>
             <h2>User Reviews</h2>
             <div className={styles.reviewBox}>
                 {reviews.map((user, index) => (
@@ -59,5 +59,6 @@ return (
                 ))}
                 </div>
         </section>
+        
     );
 }

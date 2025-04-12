@@ -11,8 +11,7 @@ function App() {
     <>
     <div className={styles.scrollContainer}>
    
-      <section 
-          className={`${styles.LoginContainer} ${styles.section}`}
+      <section className={`${styles.LoginContainer} ${styles.section}`}
           style={{
             backgroundImage: `url(${backgroundImage})`,
             backgroundSize: "cover",
@@ -72,8 +71,8 @@ function App() {
                     <div className={styles.row}>
                     <div className={styles.icon}>
                         <div className={styles.description}>
-                        <h4>SportsOne</h4>
-                        <p>Today! – more</p>
+                        <h4>COPA-AMERICA</h4>
+                        <p>Today!</p>
                         </div>
                     </div>
                     </div>
@@ -84,8 +83,8 @@ function App() {
                     <div className={styles.row}>
                     <div className={styles.icon}>
                         <div className={styles.description}>
-                        <h4>SportsOne</h4>
-                        <p>Tomorrow! - more</p>
+                        <h4>NBA</h4>
+                        <p>Tomorrow!</p>
                         </div>
                     </div>
                     </div>
@@ -96,8 +95,8 @@ function App() {
                     <div className={styles.row}>
                     <div className={styles.icon}>
                         <div className={styles.description}>
-                        <h4>SportsOne</h4>
-                        <p>Upcoming in the next week! - more</p>
+                        <h4>EURO-CUP</h4>
+                        <p>Upcoming!</p>
                         </div>
                     </div>
                     </div>
@@ -108,8 +107,8 @@ function App() {
                     <div className={styles.row}>
                     <div className={styles.icon}>
                         <div className={styles.description}>
-                        <h4>SportsOne</h4>
-                        <p>Upcoming in the next Mnth! - more</p>
+                        <h4>NFL</h4>
+                        <p>Upcoming!</p>
                         </div>
                     </div>
                     </div>
